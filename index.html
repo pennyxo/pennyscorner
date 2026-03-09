@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>penny's corner ♡</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── THEMES ────────────────────────────────────────────────── */
+:root {
+  --bg:#fdf0f5; --bg2:#fce8f0; --surface:#fff5f8; --card:#ffffff;
+  --border:#f4bdd4; --pink:#e8749a; --pink-dark:#c94f77;
+  --pink-light:#fbadc8; --blush:#fcd6e5; --text:#3d1f2b; --muted:#b07a90;
+  --shadow:0 4px 24px rgba(232,116,154,0.15);
+  --shadow-hover:0 8px 32px rgba(232,116,154,0.3);
+  --header-bg:linear-gradient(135deg,#fff0f6 0%,#fce4ef 50%,#fff0f6 100%);
+  --filter-bg:linear-gradient(90deg,#fff5f8,#fceef4,#fff5f8);
+  --banner-bg:linear-gradient(135deg,#ffe4f0,#ffd6e7,#ffe8f4);
+  --modal-header-bg:linear-gradient(135deg,#fff0f6,#fce4ef);
+}
+[data-theme="purple"] {
+  --bg:#f5f0fd; --bg2:#ede8fc; --surface:#f8f5ff; --card:#ffffff;
+  --border:#c4b0f0; --pink:#8b5cf6; --pink-dark:#6d28d9;
+  --pink-light:#a78bfa; --blush:#e0d9fb; --text:#1e1030; --muted:#7c6fa0;
+  --shadow:0 4px 24px rgba(139,92,246,0.15);
+  --shadow-hover:0 8px 32px rgba(139,92,246,0.3);
+  --header-bg:linear-gradient(135deg,#f0ebff 0%,#e4d9fc 50%,#f0ebff 100%);
+  --filter-bg:linear-gradient(90deg,#f5f0ff,#ede5fc,#f5f0ff);
+  --banner-bg:linear-gradient(135deg,#e8deff,#d8ccfc,#ecdeff);
+  --modal-header-bg:linear-gradient(135deg,#f0ebff,#e4d9fc);
+}
+[data-theme="mint"] {
+  --bg:#f0fdf8; --bg2:#e0faf2; --surface:#f5fffc; --card:#ffffff;
+  --border:#86efcb; --pink:#10b981; --pink-dark:#059669;
+  --pink-light:#34d399; --blush:#d1fae5; --text:#022c1e; --muted:#5a9e82;
+  --shadow:0 4px 24px rgba(16,185,129,0.15);
+  --shadow-hover:0 8px 32px rgba(16,185,129,0.3);
+  --header-bg:linear-gradient(135deg,#e8fff6 0%,#d4f9ea 50%,#e8fff6 100%);
+  --filter-bg:linear-gradient(90deg,#f0fff9,#e4fdf2,#f0fff9);
+  --banner-bg:linear-gradient(135deg,#d1fae5,#bbf7d0,#d1fae5);
+  --modal-header-bg:linear-gradient(135deg,#e8fff6,#d4f9ea);
+}
+[data-theme="peach"] {
+  --bg:#fff8f0; --bg2:#fdeee0; --surface:#fff9f5; --card:#ffffff;
+  --border:#fdb896; --pink:#f97316; --pink-dark:#ea580c;
+  --pink-light:#fb923c; --blush:#ffe8d5; --text:#3d1a08; --muted:#a86840;
+  --shadow:0 4px 24px rgba(249,115,22,0.15);
+  --shadow-hover:0 8px 32px rgba(249,115,22,0.3);
+  --header-bg:linear-gradient(135deg,#fff0e8 0%,#fde4cc 50%,#fff0e8 100%);
+  --filter-bg:linear-gradient(90deg,#fff5ee,#fdeee0,#fff5ee);
+  --banner-bg:linear-gradient(135deg,#ffe8d5,#fdddc0,#ffe8d5);
+  --modal-header-bg:linear-gradient(135deg,#fff0e8,#fde4cc);
+}
+[data-theme="dark"] {
+  --bg:#1a0a10; --bg2:#220d14; --surface:#2a1018; --card:#321420;
+  --border:#6b2040; --pink:#e8749a; --pink-dark:#f0a0bc;
+  --pink-light:#c94f77; --blush:#3d1525; --text:#fce4ef; --muted:#c084a0;
+  --shadow:0 4px 24px rgba(232,116,154,0.2);
+  --shadow-hover:0 8px 32px rgba(232,116,154,0.4);
+  --header-bg:linear-gradient(135deg,#220d14 0%,#2d1020 50%,#220d14 100%);
+  --filter-bg:linear-gradient(90deg,#1e0c12,#280f18,#1e0c12);
+  --banner-bg:linear-gradient(135deg,#3d1525,#4a1830,#3d1525);
+  --modal-header-bg:linear-gradient(135deg,#220d14,#2d1020);
+}
+
+/* ── BASE ───────────────────────────────────────────────────── */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;min-height:100vh;overflow-x:hidden;transition:background 0.4s,color 0.4s;}
+.hearts-bg{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
+.heart-float{position:absolute;bottom:-40px;opacity:0;animation:floatUp linear infinite;}
+@keyframes floatUp{0%{transform:translateY(0) rotate(0deg);opacity:0;}10%{opacity:0.35;}90%{opacity:0.12;}100%{transform:translateY(-110vh) rotate(360deg);opacity:0;}}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 20% 20%,rgba(244,114,182,0.06) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(251,173,200,0.08) 0%,transparent 50%);pointer-events:none;z-index:0;}
+header,.filters,main,.modal-overlay,.music-player,.page-overlay{position:relative;z-index:1;}
+
+/* ── HEADER ─────────────────────────────────────────────────── */
+header{background:var(--header-bg);border-bottom:2px solid var(--border);padding:0 20px;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 16px rgba(232,116,154,0.1);transition:background 0.4s,border-color 0.4s;gap:12px;}
+.logo-wrap{display:flex;flex-direction:column;gap:2px;flex-shrink:0;}
+.logo{font-family:'Playfair Display',serif;font-size:24px;color:var(--pink-dark);letter-spacing:1px;display:flex;align-items:center;gap:8px;}
+.logo-hearts{animation:heartbeat 1.6s ease-in-out infinite;display:inline-block;}
+@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+.logo-sub{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:2px;text-transform:uppercase;}
+.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.search-wrap{position:relative;}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:12px;pointer-events:none;}
+.search-bar{background:var(--card);border:2px solid var(--border);border-radius:50px;padding:7px 16px 7px 32px;color:var(--text);font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;width:200px;outline:none;transition:all 0.2s;}
+.search-bar:focus{border-color:var(--pink);box-shadow:0 0 0 3px rgba(232,116,154,0.15);}
+.search-bar::placeholder{color:var(--pink-light);}
+
+/* nav buttons */
+.nav-btn{background:var(--card);border:2px solid var(--border);border-radius:50px;padding:6px 14px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--muted);cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.nav-btn:hover{border-color:var(--pink);color:var(--pink-dark);background:var(--blush);}
+.nav-btn.active{background:var(--pink);border-color:var(--pink-dark);color:white;}
+
+/* ── THEME SWITCHER ─────────────────────────────────────────── */
+.theme-row{display:flex;gap:6px;align-items:center;}
+.theme-dot{width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform 0.2s,border-color 0.2s;flex-shrink:0;}
+.theme-dot:hover{transform:scale(1.2);}
+.theme-dot.active{border-color:var(--text);transform:scale(1.15);}
+.theme-dot[data-t="pink"]{background:linear-gradient(135deg,#e8749a,#c94f77);}
+.theme-dot[data-t="purple"]{background:linear-gradient(135deg,#8b5cf6,#6d28d9);}
+.theme-dot[data-t="mint"]{background:linear-gradient(135deg,#10b981,#059669);}
+.theme-dot[data-t="peach"]{background:linear-gradient(135deg,#f97316,#ea580c);}
+.theme-dot[data-t="dark"]{background:linear-gradient(135deg,#3d1525,#1a0a10);}
+
+/* ── MUSIC PLAYER ───────────────────────────────────────────── */
+.music-player{background:var(--header-bg);border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:12px;transition:background 0.4s;}
+.music-info{display:flex;align-items:center;gap:8px;flex:1;min-width:0;}
+.music-disc{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--pink-dark));display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:transform 0.1s;}
+.music-disc.spinning{animation:spin 3s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.music-title{font-size:12px;font-weight:800;color:var(--pink-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.music-sub{font-size:10px;color:var(--muted);font-weight:600;}
+.music-controls{display:flex;gap:6px;align-items:center;flex-shrink:0;}
+.mc-btn{background:var(--card);border:2px solid var(--border);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;transition:all 0.2s;color:var(--muted);}
+.mc-btn:hover{border-color:var(--pink);background:var(--blush);color:var(--pink-dark);}
+.mc-btn.playing{background:var(--pink);border-color:var(--pink-dark);color:white;}
+.volume-slider{-webkit-appearance:none;appearance:none;width:70px;height:4px;border-radius:2px;background:var(--border);outline:none;cursor:pointer;}
+.volume-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--pink);cursor:pointer;}
+
+/* ── FILTERS ────────────────────────────────────────────────── */
+.filters{background:var(--filter-bg);border-bottom:1px solid var(--border);padding:9px 20px;display:flex;gap:7px;flex-wrap:wrap;align-items:center;transition:background 0.4s;}
+.filter-label{color:var(--muted);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-right:2px;}
+.tag{background:var(--card);border:2px solid var(--border);border-radius:50px;padding:4px 12px;font-size:12px;color:var(--muted);cursor:pointer;transition:all 0.2s;font-weight:700;}
+.tag:hover{border-color:var(--pink);color:var(--pink-dark);background:var(--blush);transform:translateY(-1px);}
+.tag.active{background:linear-gradient(135deg,var(--pink),var(--pink-dark));border-color:var(--pink-dark);color:white;box-shadow:0 3px 10px rgba(232,116,154,0.35);}
+
+/* ── PAGES ──────────────────────────────────────────────────── */
+.page{display:none;}
+.page.active{display:block;}
+
+/* ── MAIN ───────────────────────────────────────────────────── */
+main{padding:28px 20px;max-width:1400px;margin:0 auto;}
+.banner{background:var(--banner-bg);border:2px solid var(--border);border-radius:16px;padding:12px 18px;margin-bottom:28px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--pink-dark);font-weight:700;box-shadow:var(--shadow);transition:background 0.4s,border-color 0.4s;}
+.section-title{font-family:'Playfair Display',serif;font-size:21px;color:var(--pink-dark);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.section-title::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--border),transparent);border-radius:2px;margin-left:8px;}
+.featured-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;margin-bottom:40px;}
+.game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;}
+
+/* ── GAME CARD ──────────────────────────────────────────────── */
+.game-card{background:var(--card);border:2px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:var(--shadow);}
+.game-card:hover{transform:translateY(-5px) scale(1.02);border-color:var(--pink);box-shadow:var(--shadow-hover);}
+.game-card.featured{background:var(--surface);border-color:var(--pink-light);}
+.game-card.coming-soon{opacity:1;cursor:not-allowed;}
+.game-card.coming-soon:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--pink-light);}
+.card-thumb{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,var(--blush),var(--bg2));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.emoji-fallback{font-size:48px;transition:transform 0.3s;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.1));}
+.game-card:not(.coming-soon):hover .emoji-fallback{transform:scale(1.15) rotate(-5deg);}
+.card-thumb::after{content:'♡ play';position:absolute;inset:0;background:rgba(201,79,119,0.75);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:white;letter-spacing:3px;opacity:0;transition:opacity 0.2s;}
+.game-card.new-tab .card-thumb::after{content:'↗ opens nearby';}
+.game-card:not(.coming-soon):hover .card-thumb::after{opacity:1;}
+
+/* ✨ coming soon sticker */
+.cs-sticker{
+  position:absolute;top:8px;left:8px;
+  background:linear-gradient(135deg,#ff85b3,#e8749a,#c94f77);
+  color:white;font-size:10px;font-weight:800;
+  padding:4px 10px;border-radius:50px;
+  letter-spacing:0.5px;
+  box-shadow:0 3px 12px rgba(232,116,154,0.5);
+  animation:stickerWobble 2s ease-in-out infinite;
+  transform-origin:left center;
+  white-space:nowrap;
+  z-index:2;
+}
+.cs-sticker::before{content:'🌸 ';}
+@keyframes stickerWobble{
+  0%,100%{transform:rotate(-2deg) scale(1);}
+  25%{transform:rotate(2deg) scale(1.05);}
+  50%{transform:rotate(-1deg) scale(1.02);}
+  75%{transform:rotate(3deg) scale(1.04);}
+}
+.card-badge{position:absolute;top:8px;right:8px;color:white;font-size:10px;padding:3px 8px;border-radius:50px;font-weight:800;letter-spacing:0.5px;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+.card-badge.hot{background:linear-gradient(135deg,#f43f5e,#e11d48);}
+.card-badge.new{background:linear-gradient(135deg,#fb923c,#f97316);}
+.card-badge.soon{background:linear-gradient(135deg,#a78bfa,#7c3aed);}
+.card-info{padding:10px 12px 12px;}
+.card-title{font-size:14px;font-weight:800;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.card-meta{display:flex;gap:5px;margin-top:4px;flex-wrap:wrap;}
+.card-tag{font-size:10px;color:var(--pink-dark);font-weight:700;background:var(--blush);padding:2px 7px;border-radius:50px;border:1px solid var(--border);}
+
+/* ── MODAL ──────────────────────────────────────────────────── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--surface);border:2px solid var(--border);border-radius:20px;width:95vw;max-width:1100px;height:92vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 80px rgba(232,116,154,0.3);animation:modalIn 0.25s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes modalIn{from{transform:scale(0.92) translateY(16px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.modal-header{background:var(--modal-header-bg);border-bottom:2px solid var(--border);padding:11px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;transition:background 0.4s;}
+.modal-title{font-family:'Playfair Display',serif;font-size:19px;color:var(--pink-dark);flex:1;}
+.modal-quote{font-size:11px;color:var(--muted);font-style:italic;flex-shrink:0;max-width:300px;text-align:right;}
+.modal-actions{display:flex;gap:7px;flex-shrink:0;}
+.btn{background:var(--card);border:2px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:50px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:all 0.2s;}
+.btn:hover{border-color:var(--pink);color:var(--pink-dark);background:var(--blush);}
+.btn.close-btn:hover{background:#ffe4e8;border-color:#f43f5e;color:#e11d48;}
+.game-frame-wrap{flex:1;background:#0a0508;position:relative;}
+.game-frame-wrap iframe{width:100%;height:100%;border:none;display:block;}
+.loading-screen{position:absolute;inset:0;background:linear-gradient(135deg,#1a0a10,#2d0f1e);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:10;}
+.loading-screen.hidden{display:none;}
+.loader{width:44px;height:44px;border:3px solid rgba(232,116,154,0.2);border-top-color:var(--pink);border-radius:50%;animation:spinL 0.8s linear infinite;}
+@keyframes spinL{to{transform:rotate(360deg)}}
+.loading-quote{font-family:'Playfair Display',serif;font-style:italic;color:#f4bdd4;font-size:14px;letter-spacing:1px;text-align:center;max-width:280px;line-height:1.5;animation:pulse 1.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+/* ── GUESTBOOK PAGE ─────────────────────────────────────────── */
+.page-content{max-width:700px;margin:0 auto;padding:28px 20px;}
+.page-header{font-family:'Playfair Display',serif;font-size:28px;color:var(--pink-dark);margin-bottom:6px;}
+.page-sub{color:var(--muted);font-size:13px;font-weight:600;margin-bottom:28px;}
+.big-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--pink),var(--pink-dark));color:white;border:none;border-radius:50px;padding:12px 28px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;cursor:pointer;text-decoration:none;box-shadow:var(--shadow-hover);transition:transform 0.2s,box-shadow 0.2s;margin-bottom:32px;}
+.big-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(232,116,154,0.4);}
+.guestbook-entries{display:flex;flex-direction:column;gap:14px;}
+.gb-entry{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);}
+.gb-name{font-size:15px;font-weight:800;color:var(--pink-dark);}
+.gb-msg{font-size:14px;color:var(--text);margin-top:4px;line-height:1.5;}
+.gb-date{font-size:11px;color:var(--muted);margin-top:6px;font-weight:600;}
+.gb-emoji{font-size:22px;float:right;}
+
+/* ── REQUEST PAGE ───────────────────────────────────────────── */
+.request-card{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--shadow);margin-bottom:20px;}
+.request-card h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--pink-dark);margin-bottom:8px;}
+.request-card p{font-size:13px;color:var(--muted);font-weight:600;line-height:1.6;margin-bottom:16px;}
+.input-field{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;outline:none;transition:border-color 0.2s;margin-bottom:10px;}
+.input-field:focus{border-color:var(--pink);}
+.input-field::placeholder{color:var(--pink-light);}
+textarea.input-field{resize:vertical;min-height:80px;}
+
+/* ── NO RESULTS ─────────────────────────────────────────────── */
+.no-results{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--pink-light);font-size:15px;font-weight:700;display:none;}
+.hidden-card{display:none!important;}
+
+/* ── SCROLLBAR ──────────────────────────────────────────────── */
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--pink);}
+
+@media(max-width:600px){
+  .search-bar{width:130px;}
+  .modal{height:100vh;width:100vw;border-radius:0;}
+  .game-grid{grid-template-columns:repeat(2,1fr);}
+  main{padding:16px 12px;}
+  .nav-btn span{display:none;}
+  .theme-row{display:none;}
+}
+</style>
+</head>
+<body data-theme="pink">
+
+<div class="hearts-bg" id="heartsBg"></div>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="logo-wrap">
+    <div class="logo">
+      <span class="logo-hearts">🌸</span>penny's corner<span class="logo-hearts">♡</span>
+    </div>
+    <span class="logo-sub">✦ games & more ✦</span>
+  </div>
+  <div class="header-right">
+    <div class="theme-row" title="switch theme">
+      <div class="theme-dot active" data-t="pink" onclick="setTheme('pink',this)" title="pink"></div>
+      <div class="theme-dot" data-t="purple" onclick="setTheme('purple',this)" title="purple"></div>
+      <div class="theme-dot" data-t="mint" onclick="setTheme('mint',this)" title="mint"></div>
+      <div class="theme-dot" data-t="peach" onclick="setTheme('peach',this)" title="peach"></div>
+      <div class="theme-dot" data-t="dark" onclick="setTheme('dark',this)" title="dark"></div>
+    </div>
+    <button class="nav-btn active" onclick="showPage('games',this)">🎮 <span>games</span></button>
+    <button class="nav-btn" onclick="showPage('guestbook',this)">💌 <span>guestbook</span></button>
+    <button class="nav-btn" onclick="showPage('request',this)">🎀 <span>request</span></button>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-bar" type="text" id="searchInput" placeholder="search games..." oninput="filterGames()">
+    </div>
+  </div>
+</header>
+
+<!-- ── MUSIC PLAYER ── -->
+<div class="music-player">
+  <div class="music-info">
+    <div class="music-disc" id="musicDisc">🎵</div>
+    <div>
+      <div class="music-title" id="musicTitle">loading track...</div>
+      <div class="music-sub">lofi beats to game to ♡</div>
+    </div>
+  </div>
+  <div class="music-controls">
+    <button class="mc-btn" onclick="prevTrack()" title="previous">⏮</button>
+    <button class="mc-btn" id="playBtn" onclick="togglePlay()" title="play/pause">▶</button>
+    <button class="mc-btn" onclick="nextTrack()" title="next">⏭</button>
+    <input type="range" class="volume-slider" id="volSlider" min="0" max="1" step="0.05" value="0.4" oninput="setVolume(this.value)" title="volume">
+  </div>
+</div>
+
+<!-- ── FILTERS ── -->
+<div class="filters" id="filtersBar">
+  <span class="filter-label">✦ browse:</span>
+  <div class="tag active" onclick="setTag('all',this)">🎀 all</div>
+  <div class="tag" onclick="setTag('horror',this)">👻 horror</div>
+  <div class="tag" onclick="setTag('puzzle',this)">🧩 puzzle</div>
+  <div class="tag" onclick="setTag('action',this)">⚡ action</div>
+  <div class="tag" onclick="setTag('survival',this)">🕯️ survival</div>
+  <div class="tag" onclick="setTag('platformer',this)">🌸 platformer</div>
+  <div class="tag" onclick="setTag('arcade',this)">🎮 arcade</div>
+  <div class="tag" onclick="setTag('music',this)">🎵 music</div>
+  <div class="tag" onclick="setTag('fan-game',this)">💖 fan games</div>
+  <div class="tag" onclick="setTag('idle',this)">🍪 idle</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- PAGE: GAMES -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="page active" id="page-games">
+  <main>
+    <div class="banner">
+      <span style="font-size:20px">🌷</span>
+      <span>all games play right here — no new tabs! &nbsp;♡&nbsp; cards marked <b>upload files</b> need game files added first — check the HOW-TO-ADD-GAMES guide!</span>
+    </div>
+    <div class="section-title">✦ featured faves</div>
+    <div class="featured-grid" id="featuredGrid"></div>
+    <div class="section-title">✦ all games</div>
+    <div class="game-grid" id="gameGrid">
+      <div class="no-results" id="noResults">✦ no games found ✦</div>
+    </div>
+  </main>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- PAGE: GUESTBOOK -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="page" id="page-guestbook">
+  <div class="page-content">
+    <div class="page-header">💌 guestbook</div>
+    <div class="page-sub">leave a little note for penny!! she reads every single one 🌸</div>
+
+    <!--
+      HOW TO SET UP YOUR GUESTBOOK:
+      1. go to https://docs.google.com/forms
+      2. create a new form with fields: Name, Message, and a fun emoji picker
+      3. click the share button → get the prefilled link
+      4. paste that link below replacing YOUR_GOOGLE_FORM_LINK
+    -->
+    <a class="big-btn" href="YOUR_GOOGLE_FORM_LINK" target="_blank" rel="noopener">
+      💌 sign my guestbook!
+    </a>
+
+    <div class="section-title" style="margin-top:8px">✦ recent visitors</div>
+    <div class="guestbook-entries">
+      <!-- these are example entries — add your own as people fill in the form! -->
+      <!-- copy this block to add more entries -->
+      <div class="gb-entry">
+        <span class="gb-emoji">🌸</span>
+        <div class="gb-name">penny</div>
+        <div class="gb-msg">welcome to my corner of the internet!! i hope u enjoy the games 💖 i made this site just for fun and i'm SO happy ur here!!</div>
+        <div class="gb-date">the very beginning ✦</div>
+      </div>
+      <div class="gb-entry">
+        <span class="gb-emoji">⭐</span>
+        <div class="gb-name">your friend</div>
+        <div class="gb-msg">omg this site is so cute!! the pink aesthetic is everything 😭💗 please add more FNF mods!!</div>
+        <div class="gb-date">recently ✦</div>
+      </div>
+      <div class="gb-entry">
+        <span class="gb-emoji">🎮</span>
+        <div class="gb-name">a visitor</div>
+        <div class="gb-msg">finally a games site that doesn't look boring lol. penny's corner is the best!! bookmarked forever 🔖</div>
+        <div class="gb-date">today ✦</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- PAGE: GAME REQUEST -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="page" id="page-request">
+  <div class="page-content">
+    <div class="page-header">🎀 request a game</div>
+    <div class="page-sub">want to see a specific game on penny's corner? fill this out and i'll try my best!! 🌷</div>
+
+    <div class="request-card">
+      <h3>✦ how it works</h3>
+      <p>
+        type in what game you want below, hit send, and it'll open a pre-written email to penny!
+        she checks requests and tries to add popular ones 💖<br><br>
+        <b>tip:</b> the more people request the same game, the faster it gets added!
+      </p>
+
+      <input class="input-field" type="text" id="reqName" placeholder="your name or nickname ♡">
+      <input class="input-field" type="text" id="reqGame" placeholder="game name (e.g. FNF Tricky Mod)">
+      <textarea class="input-field" id="reqMsg" placeholder="anything else? (optional) — like 'pls add this its so fun!!'"></textarea>
+
+      <!--
+        SETUP: replace YOUREMAIL@gmail.com below with your actual email address!
+        when someone clicks send, it opens their email app pre-filled ♡
+      -->
+      <button class="big-btn" onclick="sendRequest()" style="margin-bottom:0">
+        💌 send request
+      </button>
+    </div>
+
+    <div class="request-card">
+      <h3>✦ most requested</h3>
+      <p>these are games people are asking for the most — keep an eye out for them being added soon!!</p>
+      <!-- add games here as people request them!! -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span class="card-tag" style="font-size:13px;padding:4px 12px">🎵 FNF Mods</span>
+        <span class="card-tag" style="font-size:13px;padding:4px 12px">👻 FNAF Games</span>
+        <span class="card-tag" style="font-size:13px;padding:4px 12px">📏 Baldi's Basics</span>
+        <span class="card-tag" style="font-size:13px;padding:4px 12px">🍪 Cookie Clicker</span>
+        <span class="card-tag" style="font-size:13px;padding:4px 12px">⛏️ Minecraft</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── GAME MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">game</div>
+      <div class="modal-quote" id="modalQuote"></div>
+      <div class="modal-actions">
+        <span class="card-tag" id="modalTag"></span>
+        <button class="btn" onclick="goFullscreen()">⛶ fullscreen</button>
+        <button class="btn close-btn" onclick="closeModal()">✕ close</button>
+      </div>
+    </div>
+    <div class="game-frame-wrap">
+      <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+        <div class="loading-quote" id="loadingQuote">loading your game ♡</div>
+      </div>
+      <iframe id="gameFrame" src="about:blank" allowfullscreen
+        allow="fullscreen; autoplay; gamepad"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox"
+        onload="hideLoader()">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  🌸 PENNY'S CORNER — CONFIGURATION 🌸                       ║
+// ║                                                              ║
+// ║  YOUR EMAIL — replace this with your real email!!           ║
+// ║  game requests will be sent here                            ║
+const PENNY_EMAIL = "YOUREMAIL@gmail.com";
+// ║                                                              ║
+// ║  YOUR GOOGLE FORM LINK — replace in the guestbook section   ║
+// ║  above (search for YOUR_GOOGLE_FORM_LINK)                   ║
+// ╚══════════════════════════════════════════════════════════════╝
+
+// ── LOADING QUOTES ───────────────────────────────────────────
+const LOADING_QUOTES = [
+  "loading your game ♡",
+  "preparing something fun... 🌸",
+  "almost there, bestie! ✦",
+  "sprinkling some magic... ✨",
+  "warming up the vibes... 💖",
+  "just a sec, grabbing the good stuff 🎀",
+  "penny approved content loading... 🌷",
+  "get ready to have fun!! 🎮",
+  "shh it's almost ready ♡",
+  "loading... don't blink!! 👀",
+];
+
+// ── MUSIC TRACKS ─────────────────────────────────────────────
+// These are free-to-use lofi tracks from YouTube embeds.
+// Replace src links with your own audio files if you want!
+// To use your own: upload .mp3 files to neocities and use "./music/song.mp3"
+const TRACKS = [
+  { title: "lofi chill vibes", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+  { title: "dreamy beats", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+  { title: "cozy afternoon", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
+  { title: "pink sky ♡", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" },
+  { title: "soft & sweet", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" },
+  // ADD MORE: just copy a line above and change the title + src ♡
+];
+
+// ── GAMES LIST ───────────────────────────────────────────────
+// comingSoon: true  = grayed out, shows "upload files"
+// comingSoon: false = clickable and playable!!
+// newTab: true      = opens in new tab (for sites that block iframes)
+const GAMES = [
+  // 🎵 FRIDAY NIGHT FUNKIN
+  { title:"Friday Night Funkin'", tags:["music","action"], badge:"hot", featured:true, emoji:"🎤",
+    url:"./games/fnf/index.html", comingSoon:true },
+  { title:"FNF: Whitty Mod", tags:["music","action","fan-game"], badge:"hot", featured:true, emoji:"💣",
+    url:"./games/fnf-whitty/index.html", comingSoon:true },
+  { title:"FNF: Tricky Mod", tags:["music","action","fan-game"], badge:"hot", featured:false, emoji:"🤡",
+    url:"./games/fnf-tricky/index.html", comingSoon:true },
+  { title:"FNF: Hex Mod", tags:["music","action","fan-game"], badge:null, featured:false, emoji:"🤖",
+    url:"./games/fnf-hex/index.html", comingSoon:true },
+  { title:"FNF: Shaggy Mod", tags:["music","action","fan-game"], badge:"hot", featured:false, emoji:"👨",
+    url:"./games/fnf-shaggy/index.html", comingSoon:true },
+  { title:"FNF: Matt Mod", tags:["music","action","fan-game"], badge:"hot", featured:false, emoji:"🥊",
+    url:"./games/fnf-matt/index.html", comingSoon:true },
+  { title:"FNF: Bob & Bosip", tags:["music","action","fan-game"], badge:null, featured:false, emoji:"📦",
+    url:"./games/fnf-bob/index.html", comingSoon:true },
+  { title:"FNF: VS Impostor", tags:["music","action","fan-game"], badge:"new", featured:false, emoji:"🔴",
+    url:"./games/fnf-impostor/index.html", comingSoon:true },
+  { title:"FNF: Garcello", tags:["music","action","fan-game"], badge:null, featured:false, emoji:"🎸",
+    url:"./games/fnf-garcello/index.html", comingSoon:true },
+  { title:"FNF: Sky Mod", tags:["music","action","fan-game"], badge:null, featured:false, emoji:"☁️",
+    url:"./games/fnf-sky/index.html", comingSoon:true },
+
+  // 👻 HORROR / FAN GAMES
+  { title:"FNAF Fan Game", tags:["horror","survival","fan-game"], badge:"hot", featured:true, emoji:"📷",
+    url:"./games/fnaf-fangame/index.html", comingSoon:true },
+  { title:"Baldi's Basics Fan", tags:["horror","puzzle","fan-game"], badge:"hot", featured:true, emoji:"📏",
+    url:"./games/baldis/index.html", comingSoon:true },
+  { title:"Tattletail Fan Game", tags:["horror","survival","fan-game"], badge:null, featured:false, emoji:"🪆",
+    url:"./games/tattletail/index.html", comingSoon:true },
+  { title:"Kindergarten Fan Game", tags:["horror","puzzle","fan-game"], badge:null, featured:false, emoji:"🏫",
+    url:"./games/kindergarten/index.html", comingSoon:true },
+  { title:"Slender: Eight Pages", tags:["horror","survival"], badge:null, featured:false, emoji:"🌲",
+    url:"./games/slender/index.html", comingSoon:true },
+  { title:"Poppy Playtime Fan", tags:["horror","survival","fan-game"], badge:"new", featured:false, emoji:"🧸",
+    url:"./games/poppy/index.html", comingSoon:true },
+
+  // 🍪 IDLE
+  { title:"Cookie Clicker", tags:["idle","arcade"], badge:"hot", featured:true, emoji:"🍪",
+    url:"./games/cookie-clicker/index.html", comingSoon:true },
+
+  // 🧩 PUZZLE
+  { title:"2048", tags:["puzzle","arcade"], badge:null, featured:false, emoji:"🔢",
+    url:"./games/2048/index.html", comingSoon:true },
+  { title:"Hextris", tags:["puzzle","arcade"], badge:null, featured:false, emoji:"🔷",
+    url:"./games/hextris/index.html", comingSoon:true },
+  { title:"Minesweeper", tags:["puzzle"], badge:null, featured:false, emoji:"💣",
+    url:"./games/minesweeper/index.html", comingSoon:true },
+  { title:"Wordle Clone", tags:["puzzle"], badge:null, featured:false, emoji:"🟩",
+    url:"./games/wordle/index.html", comingSoon:true },
+
+  // 🎮 ARCADE
+  { title:"Tetris", tags:["arcade","puzzle"], badge:null, featured:false, emoji:"🟦",
+    url:"./games/tetris/index.html", comingSoon:true },
+  { title:"Flappy Bird", tags:["arcade"], badge:null, featured:false, emoji:"🐦",
+    url:"./games/flappy-bird/index.html", comingSoon:true },
+  { title:"Snake", tags:["arcade"], badge:null, featured:false, emoji:"🐍",
+    url:"./games/snake/index.html", comingSoon:true },
+  { title:"Duck Hunt JS", tags:["arcade","action"], badge:null, featured:false, emoji:"🦆",
+    url:"./games/duck-hunt/index.html", comingSoon:true },
+  { title:"Pac-Man", tags:["arcade"], badge:null, featured:false, emoji:"👾",
+    url:"./games/pacman/index.html", comingSoon:true },
+  { title:"Asteroids", tags:["arcade","action"], badge:null, featured:false, emoji:"☄️",
+    url:"./games/asteroids/index.html", comingSoon:true },
+  { title:"Breakout", tags:["arcade","puzzle"], badge:null, featured:false, emoji:"🧱",
+    url:"./games/breakout/index.html", comingSoon:true },
+
+  // 🌸 PLATFORMER
+  { title:"Super Mario HTML5", tags:["platformer","action"], badge:"hot", featured:true, emoji:"🍄",
+    url:"./games/mario/index.html", comingSoon:true },
+
+  // ⚡ ACTION
+  { title:"Minecraft Classic", tags:["action","survival"], badge:"hot", featured:true, emoji:"⛏️",
+    url:"https://classic.minecraft.net/?join=true", comingSoon:false, newTab:true },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// ENGINE — you don't need to touch anything below here!! ♡
+// ═══════════════════════════════════════════════════════════════
+
+// ── PAGES ────────────────────────────────────────────────────
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.getElementById('filtersBar').style.display = name === 'games' ? '' : 'none';
+  document.getElementById('searchInput').style.display = name === 'games' ? '' : 'none';
+}
+
+// ── THEME ────────────────────────────────────────────────────
+function setTheme(t, el) {
+  document.body.setAttribute('data-theme', t);
+  document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+  el.classList.add('active');
+  localStorage.setItem('pennys-theme', t);
+}
+
+// ── CARDS ────────────────────────────────────────────────────
+let activeTag = 'all';
+
+function buildCards(container, games, isFeatured) {
+  games.forEach(game => {
+    const card = document.createElement('div');
+    card.className = 'game-card'
+      + (isFeatured ? ' featured' : '')
+      + (game.comingSoon ? ' coming-soon' : '')
+      + (game.newTab ? ' new-tab' : '');
+    card.dataset.tags = game.tags.join(',');
+    card.dataset.title = game.title.toLowerCase();
+    if (!game.comingSoon) card.onclick = () => openGame(game);
+    card.innerHTML = `
+      <div class="card-thumb">
+        <div class="emoji-fallback">${game.emoji}</div>
+        ${game.comingSoon ? `<div class="cs-sticker">coming soon!!</div>` : ''}
+        ${game.badge ? `<span class="card-badge ${game.badge}">${
+          game.badge==='hot'?'🔥 hot':game.badge==='new'?'✨ new':'💜 soon'
+        }</span>` : ''}
+      </div>
+      <div class="card-info">
+        <div class="card-title">${game.title}</div>
+        <div class="card-meta">
+          ${game.tags.slice(0,2).map(t=>`<span class="card-tag">${t}</span>`).join('')}
+        </div>
+      </div>`;
+    container.appendChild(card);
+  });
+}
+
+// ── GAME MODAL ───────────────────────────────────────────────
+function openGame(game) {
+  if (game.newTab) { window.open(game.url, '_blank'); return; }
+  document.getElementById('modalTitle').textContent = game.title;
+  document.getElementById('modalTag').textContent = game.tags[0];
+  const q = LOADING_QUOTES[Math.floor(Math.random() * LOADING_QUOTES.length)];
+  document.getElementById('loadingQuote').textContent = q;
+  document.getElementById('modalQuote').textContent = '"' + q + '"';
+  document.getElementById('loadingScreen').classList.remove('hidden');
+  document.getElementById('gameFrame').src = game.url;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function hideLoader() {
+  document.getElementById('loadingScreen').classList.add('hidden');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.getElementById('gameFrame').src = 'about:blank';
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function goFullscreen() {
+  const f = document.getElementById('gameFrame');
+  if (f.requestFullscreen) f.requestFullscreen();
+  else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen();
+}
+
+// ── FILTER / SEARCH ──────────────────────────────────────────
+function setTag(tag, el) {
+  activeTag = tag;
+  document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  filterGames();
+}
+
+function filterGames() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const cards = document.querySelectorAll('#gameGrid .game-card');
+  let visible = 0;
+  cards.forEach(card => {
+    const ok = (activeTag === 'all' || card.dataset.tags.includes(activeTag))
+             && card.dataset.title.includes(query);
+    card.classList.toggle('hidden-card', !ok);
+    if (ok) visible++;
+  });
+  document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+}
+
+// ── MUSIC PLAYER ─────────────────────────────────────────────
+let audio = new Audio();
+let trackIdx = 0;
+let isPlaying = false;
+
+function loadTrack(idx) {
+  trackIdx = (idx + TRACKS.length) % TRACKS.length;
+  audio.src = TRACKS[trackIdx].src;
+  audio.volume = parseFloat(document.getElementById('volSlider').value);
+  document.getElementById('musicTitle').textContent = TRACKS[trackIdx].title;
+  if (isPlaying) audio.play().catch(() => {});
+}
+
+function togglePlay() {
+  if (isPlaying) {
+    audio.pause();
+    isPlaying = false;
+    document.getElementById('playBtn').classList.remove('playing');
+    document.getElementById('playBtn').textContent = '▶';
+    document.getElementById('musicDisc').classList.remove('spinning');
+  } else {
+    audio.play().then(() => {
+      isPlaying = true;
+      document.getElementById('playBtn').classList.add('playing');
+      document.getElementById('playBtn').textContent = '⏸';
+      document.getElementById('musicDisc').classList.add('spinning');
+    }).catch(() => {
+      document.getElementById('musicTitle').textContent = 'click ▶ to start music ♡';
+    });
+  }
+}
+
+function nextTrack() { loadTrack(trackIdx + 1); }
+function prevTrack() { loadTrack(trackIdx - 1); }
+function setVolume(v) { audio.volume = parseFloat(v); }
+
+audio.addEventListener('ended', () => { loadTrack(trackIdx + 1); if(isPlaying) audio.play().catch(()=>{}); });
+
+// ── GAME REQUEST EMAIL ────────────────────────────────────────
+function sendRequest() {
+  const name = document.getElementById('reqName').value.trim() || 'anonymous';
+  const game = document.getElementById('reqGame').value.trim();
+  const msg  = document.getElementById('reqMsg').value.trim();
+  if (!game) { alert("please type a game name!! 🌸"); return; }
+  const subject = encodeURIComponent(`game request from ${name} ♡`);
+  const body = encodeURIComponent(
+    `hi penny!!\n\n${name} is requesting: ${game}\n\n${msg ? 'extra note: ' + msg : ''}\n\nsent from penny's corner 🌸`
+  );
+  window.location.href = `mailto:${PENNY_EMAIL}?subject=${subject}&body=${body}`;
+}
+
+// ── FLOATING HEARTS ──────────────────────────────────────────
+function spawnHearts() {
+  const container = document.getElementById('heartsBg');
+  const symbols = ['♡','🌸','✦','·','✿','♡','♡','·'];
+  for (let i = 0; i < 22; i++) {
+    const el = document.createElement('div');
+    el.className = 'heart-float';
+    el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    el.style.left = Math.random() * 100 + '%';
+    el.style.fontSize = (8 + Math.random() * 12) + 'px';
+    el.style.animationDuration = (14 + Math.random() * 22) + 's';
+    el.style.animationDelay = (Math.random() * 20) + 's';
+    el.style.color = ['#e8749a','#f4bdd4','#c94f77','#fbadc8','#f9a8d4'][Math.floor(Math.random()*5)];
+    container.appendChild(el);
+  }
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+function init() {
+  // build game cards
+  buildCards(document.getElementById('featuredGrid'), GAMES.filter(g => g.featured), true);
+  buildCards(document.getElementById('gameGrid'), GAMES, false);
+
+  // restore theme
+  const saved = localStorage.getItem('pennys-theme');
+  if (saved) {
+    const dot = document.querySelector(`.theme-dot[data-t="${saved}"]`);
+    if (dot) setTheme(saved, dot);
+  }
+
+  // load first music track
+  loadTrack(0);
+
+  // floating hearts
+  spawnHearts();
+
+  // keyboard shortcuts
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+}
+
+init();
+</script>
+</body>
+</html>
