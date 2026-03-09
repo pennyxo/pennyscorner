@@ -1,2 +1,2 @@
-# pennyscorner
+# pennyscorner.iscool
 totally not games
